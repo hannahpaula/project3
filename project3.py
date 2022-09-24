@@ -22,6 +22,7 @@ while True:
     if json_status == 0:
         print("API Status: " + str(json_status) + " = A successful route call.\n")
         print("=============================================")
+        # Outputs the data into a table
         myTable.add_row([(orig), (dest), str(json_data["route"]["distance"]), str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str(json_data["route"]["fuelUsed"]), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)) ])
         print(myTable)
         # print("Directions from " + (orig) + " to " + (dest))

@@ -5,7 +5,7 @@ from prettytable import PrettyTable
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "lUQgxATC6sYeGAogZ0A7vJd3ivsHP8Ju"
 
-myTable = PrettyTable(["Origin", "Destination","Distance (Miles)", "Fuel Used (Gal)"])
+myTable = PrettyTable(["Origin", "Destination","Distance (Miles)", "Distance (Kilometers)", "Fuel Used (Gal)", "Fuel Used (Ltr)"])
 
 
 while True:
@@ -22,11 +22,13 @@ while True:
     if json_status == 0:
         print("API Status: " + str(json_status) + " = A successful route call.\n")
         print("=============================================")
-        print("Directions from " + (orig) + " to " + (dest))
-        print("Trip Duration: " + (json_data["route"]["formattedTime"]))
+        myTable.add_row([(orig), (dest), str(json_data["route"]["distance"]), str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str(json_data["route"]["fuelUsed"]), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)) ])
+        print(myTable)
+        # print("Directions from " + (orig) + " to " + (dest))
+        # print("Trip Duration: " + (json_data["route"]["formattedTime"]))
         # miles and galon
-        print("Miles: " + str(json_data["route"]["distance"]))
-        print("Fuel Used (Gal): " + str(json_data["route"]["fuelUsed"]))
+        # print("Miles: " + str(json_data["route"]["distance"]))
+        # print("Fuel Used (Gal): " + str(json_data["route"]["fuelUsed"]))
         # kilometers and liters conversion
         print("Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"])*1.61)))
         print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
@@ -35,8 +37,7 @@ while True:
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
         print("=============================================\n")
-        myTable.add_row([(orig), (dest), str(json_data["route"]["distance"]), str(json_data["route"]["fuelUsed"])])
-        print(myTable)
+        
 
     elif json_status == 402:
         print("**********************************************")

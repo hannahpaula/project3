@@ -1,8 +1,12 @@
 import urllib.parse
 import requests
+from prettytable import PrettyTable
 
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "lUQgxATC6sYeGAogZ0A7vJd3ivsHP8Ju"
+
+myTable = PrettyTable(["Origin", "Destination","Distance (Miles)","Fuel Used (Gal)","Directions"])
+
 
 while True:
     orig = input("Starting Location: ")
@@ -27,9 +31,13 @@ while True:
         print("Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"])*1.61)))
         print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
         print("=============================================")
+        print("Directions:")
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
         print("=============================================\n")
+        myTable.add_row([(orig), (dest)])
+        print(myTable)
+
     elif json_status == 402:
         print("**********************************************")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")

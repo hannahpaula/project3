@@ -30,8 +30,8 @@ while True:
         # print("Miles: " + str(json_data["route"]["distance"]))
         # print("Fuel Used (Gal): " + str(json_data["route"]["fuelUsed"]))
         # kilometers and liters conversion
-        print("Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"])*1.61)))
-        print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
+        # print("Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"])*1.61)))
+        # print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
         print("=============================================")
         print("Directions:")
         for each in json_data["route"]["legs"][0]["maneuvers"]:

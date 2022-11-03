@@ -4,9 +4,9 @@ from prettytable import PrettyTable
 from colorama import Fore, Style
 
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
-key = "lUQgxATC6sYeGAogZ0A7vJd3ivsHP8Ju"
+key = "GZhxy49gaCdw82j6bLpcFTXE3A7MMvJ7"
 
-myTable = PrettyTable(["Origin", "Destination","Distance (Miles)", "Distance (Kilometers)", "Fuel Used (Gal)", "Fuel Used (Ltr)"])
+myTable = PrettyTable(["\033[1;31mOrigin\033[0m", "\033[1;32mDestination\033[0m","Distance (Miles)", "Distance (Kilometers)", "Fuel Used (Gal)", "Fuel Used (Ltr)"])
 
 while True:
     # gets user input starting location
@@ -31,7 +31,7 @@ while True:
         print("API Status: " + str(json_status) + " = A successful route call.\n")
         print("=============================================")
         # Outputs the data into a table
-        myTable.add_row([(orig), (dest), str(json_data["route"]["distance"]), str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str(json_data["route"]["fuelUsed"]), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)) ])
+        myTable.add_row([(orig), (dest), str(json_data["route"]["distance"]), str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str(json_data["route"]["fuelUsed"]), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78))])
         print(myTable)
         print("=============================================")
         print("Directions:")

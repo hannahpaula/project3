@@ -38,7 +38,7 @@ while True:
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
         print("=============================================\n")
-        
+        #hahahah
     # for errors
     elif json_status == 402:
         print(Fore.RED)

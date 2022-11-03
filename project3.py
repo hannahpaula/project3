@@ -1,6 +1,7 @@
 import urllib.parse
 import requests
 from prettytable import PrettyTable
+from colorama import Fore, Style
 
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "lUQgxATC6sYeGAogZ0A7vJd3ivsHP8Ju"
@@ -9,14 +10,17 @@ myTable = PrettyTable(["Origin", "Destination","Distance (Miles)", "Distance (Ki
 
 while True:
     # gets user input starting location
+    print(Fore.YELLOW)
     orig = input("Starting Location: ")
     if orig == "quit" or orig == "q":
         break
     # gets user input destination
+    print(Fore.CYAN)
     dest = input("Destination: ")
     if dest == "quit" or dest == "q":
         break
     url = main_api + urllib.parse.urlencode({"key":key, "from":orig, "to":dest})
+    print(Fore.GREEN)
     print("URL: " + (url))
     json_data = requests.get(url).json()
     json_status = json_data["info"]["statuscode"]
@@ -37,14 +41,17 @@ while True:
         
     # for errors
     elif json_status == 402:
+        print(Fore.RED)
         print("**********************************************")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
         print("**********************************************\n")
     elif json_status == 611:
+        print(Fore.RED)
         print("**********************************************")
         print("Status Code: " + str(json_status) + "; Missing an entry for one or both locations.")
         print("**********************************************\n")
     else:
+        print(Fore.RED)
         print("************************************************************************")
         print("For Staus Code: " + str(json_status) + "; Refer to:")
         print("https://developer.mapquest.com/documentation/directions-api/status-codes")

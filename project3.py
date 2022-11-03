@@ -5,7 +5,13 @@ from prettytable import PrettyTable
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "lUQgxATC6sYeGAogZ0A7vJd3ivsHP8Ju"
 
-myTable = PrettyTable(["Origin", "Destination","Distance (Miles)", "Distance (Kilometers)", "Fuel Used (Gal)", "Fuel Used (Ltr)"])
+R = "\033[0;31;40m" #RED
+G = "\033[0;32;40m" # GREEN
+Y = "\033[0;33;40m" # Yellow
+B = "\033[0;34;40m" # Blue
+N = "\033[0m" # Reset
+
+myTable = PrettyTable(["\033[1;31mOrigin\033[0m", "\033[1;32mDestination\033[0m","Distance (Miles)", "Distance (Kilometers)", "Fuel Used (Gal)", "Fuel Used (Ltr)"])
 
 
 while True:
@@ -20,6 +26,8 @@ while True:
     json_data = requests.get(url).json()
     json_status = json_data["info"]["statuscode"]
     if json_status == 0:
+        orig = "\033[1;31m%s\033[0m" %orig
+        dest = "\033[1;32m%s\033[0m" %dest
         print("API Status: " + str(json_status) + " = A successful route call.\n")
         print("=============================================")
         myTable.add_row([(orig), (dest), str(json_data["route"]["distance"]), str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str(json_data["route"]["fuelUsed"]), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)) ])

@@ -33,6 +33,7 @@ while True:
         # Outputs the data into a table
         myTable.add_row([(orig), (dest), str(json_data["route"]["distance"]), str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str(json_data["route"]["fuelUsed"]), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78))])
         print(myTable)
+        print(Fore.MAGENTA)
         print("=============================================")
         print("Directions:")
         for each in json_data["route"]["legs"][0]["maneuvers"]:
